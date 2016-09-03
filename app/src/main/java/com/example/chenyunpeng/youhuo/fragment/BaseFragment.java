@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.chenyunpeng.youhuo.diaglog.LoadDataDiaglog;
 
@@ -50,5 +51,8 @@ public abstract class BaseFragment extends Fragment {
     public void dismissionLoadDialog(){
         if(loadDataDiaglog!=null)
             loadDataDiaglog.dismiss();
+    }
+    public  void toast(String str){
+        Toast.makeText(a,str+"",Toast.LENGTH_SHORT).show();
     }
 }

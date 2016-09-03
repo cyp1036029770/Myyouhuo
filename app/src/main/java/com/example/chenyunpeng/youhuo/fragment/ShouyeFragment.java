@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.chenyunpeng.youhuo.R;
 import com.example.chenyunpeng.youhuo.adapter.HomeGridviewAdapter;
+import com.example.chenyunpeng.youhuo.adapter.ShouYeGridAdapter;
 import com.example.chenyunpeng.youhuo.bena.GridBean;
 import com.example.chenyunpeng.youhuo.bena.HomeBean;
 import com.example.chenyunpeng.youhuo.bena.HttpModel;
@@ -39,18 +40,36 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
     private MyPullToReflash lv;
     private List<String> stringList;
     private ArrayAdapter<String> adapter;
+    List<List<HomeBean.BrandBean>> beanList=new ArrayList<>();
 
     @Override
     protected void initData() {
-        new HttpUtils().post(HttpModel.RECOMMEND, "parames={\"page\":\"1\"}").DataCallBack(new HttpUtils.DataCallBack() {
+        showLoadDialog();
+       loadData();
+    }
+
+    private void loadData() {
+        new HttpUtils().post(HttpModel.HOMEPAGER, "parames={\\\"shop\\\":\\\"1\\\"}").DataCallBack(new HttpUtils.DataCallBack() {
             @Override
             public void successful(String data) {
-                Log.e("tag",""+data.toString());
+                HomeBean homeBean = new Gson().fromJson(data, HomeBean.class);
+                beanList.clear();;
+                Log.e("tagsss",""+homeBean.getBrand().toString());
+                beanList.add(homeBean.getBrand());
+                beanList.add(homeBean.getMen());
+                beanList.add(homeBean.getMenpants());
+                beanList.add(homeBean.getAccessories());
+                beanList.add(homeBean.getOther());
+                ShouYeGridAdapter adapter=new ShouYeGridAdapter(beanList,a);
+                lv.setAdapter(adapter);
+
+                dismissionLoadDialog();
             }
 
             @Override
             public void failrue(String e) {
-                Log.e("tag22", "" + e);
+                toast(""+e);
+                dismissionLoadDialog();
             }
         });
     }
@@ -114,7 +133,8 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(a, "jiazaishuju", Toast.LENGTH_SHORT).show();
+                loadData();
+                Toast.makeText(a, "加载数据成功", Toast.LENGTH_SHORT).show();
                 lv.setPullSuccess();
             }
         }, 2000);
@@ -125,7 +145,8 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(a, "jiazaishuju", Toast.LENGTH_SHORT).show();
+                loadData();
+                Toast.makeText(a, "加载数据成功", Toast.LENGTH_SHORT).show();
                 lv.setLoadSuccess();
             }
         }, 2000);
