@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="220dp">
+        <ImageView
+            android:id="@+id/shopcart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/homepage_shopcart_down" />
+
+        <TextView
+            android:id="@+id/tv_gouwuche"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shopcart"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="您的购物车暂无商品" />
+
+        <Button
+            android:id="@+id/gouwuche_btn"
+            android:background="@drawable/select_gouwuche_btn_circle"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_gouwuche"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="您的购物车暂无商品" />
+</RelativeLayout>

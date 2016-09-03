@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="match_parent">
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <RadioButton
+            android:id="@+id/boy_pinlei"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/select_pinlei_btn_textcolor"
+            android:text="Boy"
+            android:button="@null"
+            android:gravity="center"
+            />
+        <RadioButton style="@style/fragment_pinlei_line"></RadioButton>
+        <RadioButton
+            android:id="@+id/girl_pinlei"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/select_pinlei_btn_textcolor"
+            android:text="Girl"
+            android:button="@null"
+            android:gravity="center"
+            />
+        <RadioButton style="@style/fragment_pinlei_line"></RadioButton>
+        <RadioButton
+            android:id="@+id/lifestyle_pinlei"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/select_pinlei_btn_textcolor"
+            android:text="LifeStyle"
+            android:button="@null"
+            android:gravity="center"
+            />
+    </RadioGroup>
+   <ExpandableListView
+       android:id="@+id/expandListView"
+       android:layout_below="@+id/radio_group"
+       android:layout_width="match_parent"
+       android:groupIndicator="@null"
+       android:layout_height="match_parent">
+   </ExpandableListView>
+
+</RelativeLayout>

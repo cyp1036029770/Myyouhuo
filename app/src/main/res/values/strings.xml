@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">YouHuo</string>
+    <item name="head" type="id"></item>
+    <item name="foot" type="id"></item>
+    <array name="arr">
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+        <item>YouHuo</item>
+    </array>
+</resources>

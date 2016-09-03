@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:entries="@array/arr"></ListView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RadioGroup
+            android:background="#FFFFFF"
+            android:id="@+id/buttonGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <com.example.chenyunpeng.youhuo.view.MyRadioButton
+
+                android:id="@+id/shouye"
+                style="@style/myradiobuttonStyle"
+                android:drawableTop="@drawable/select_shouye"
+                android:checked="true"
+                android:text="首页" />
+
+            <com.example.chenyunpeng.youhuo.view.MyRadioButton
+                android:id="@+id/feilei"
+                style="@style/myradiobuttonStyle"
+                android:drawableTop="@drawable/select_feilei"
+                android:text="分类" />
+
+            <com.example.chenyunpeng.youhuo.view.MyRadioButton
+                android:id="@+id/guang"
+                style="@style/myradiobuttonStyle"
+                android:drawableTop="@drawable/select_guang"
+                android:text="逛" />
+
+            <com.example.chenyunpeng.youhuo.view.MyRadioButton
+                android:id="@+id/gouwuche"
+                style="@style/myradiobuttonStyle"
+                android:drawableTop="@drawable/select_gouwuche"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                app:circleText="10"
+                app:isDrawRedCircle="true"
+                android:text="购物车" />
+
+            <com.example.chenyunpeng.youhuo.view.MyRadioButton
+                android:id="@+id/mine"
+                style="@style/myradiobuttonStyle"
+                android:drawableTop="@drawable/select_mine"
+                android:text="我的" />
+        </RadioGroup>
+     <FrameLayout
+         android:layout_above="@+id/buttonGroup"
+         android:background="#F0F0F0"
+         android:id="@+id/FragmentGroup"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+
+     </FrameLayout>
+    </RelativeLayout>
+
+</android.support.v4.widget.SlidingPaneLayout>

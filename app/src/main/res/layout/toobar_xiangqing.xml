@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="65dp">
+<RadioGroup
+    android:id="@+id/radio_group"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize">
+    <RadioButton
+        android:id="@+id/zuixin_xiangqing"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="最新"
+        android:textColor="@color/select_pinlei_btn_textcolor"
+        android:button="@null"
+        android:drawableRight="@mipmap/shared_segmentedcontrol_down_normal"
+        android:gravity="center"
+        />
+    <RadioButton
+        android:id="@+id/jiage_xiangqing"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="价格"
+        android:textColor="@color/select_pinlei_btn_textcolor"
+        android:button="@null"
+        android:drawableRight="@mipmap/shared_segmentedcontrol_2_down"
+        android:gravity="center"
+        />
+    <RadioButton
+        android:id="@+id/zhekou_xiangqing"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="折扣"
+        android:textColor="@color/select_pinlei_btn_textcolor"
+        android:button="@null"
+        android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/shared_segmentedcontrol_2_down"
+        android:gravity="center"
+        />
+</RadioGroup>
+</RelativeLayout>

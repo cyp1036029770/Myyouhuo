@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="myradiobuttonStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="tablayoutStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorWrite</item>
+    </style>
+
+    <style name="fragment_pinlei_line">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:background">#ccc</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <declare-styleable name="MyRadioButton">
+        <attr name="isDrawRedCircle" format="boolean"></attr>
+        <attr name="circleText" format="integer"></attr>
+    </declare-styleable>
+    <style name="addcart_diaglog" >
+        <item name="android:windowEnterAnimation">@anim/diaglog_in</item>
+        <item name="android:windowExitAnimation">@anim/diaglog_out</item>
+    </style>
+</resources>

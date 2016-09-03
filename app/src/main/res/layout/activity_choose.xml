@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#60CCCC"
+    tools:context=".activity.ChooseActivity">
+    <LinearLayout
+        android:orientation="vertical"
+         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/boys"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_welcome_boys" />
+
+        <ImageButton
+            android:id="@+id/girls"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_welcome_girls" />
+
+        <ImageButton
+            android:id="@+id/kids"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_welcome_kids" />
+
+        <ImageButton
+            android:id="@+id/lifestyle"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/select_welcome_lifestyle" />
+
+    </LinearLayout>
+
+</RelativeLayout>

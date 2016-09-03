@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#333333"
+        >
+      <ImageButton
+          android:id="@+id/feilei_menu"
+          android:layout_centerVertical="true"
+          android:layout_marginLeft="10dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/toolbar_menu"
+          android:background="@null"
+          />
+        <android.support.design.widget.TabLayout
+            android:layout_marginLeft="90dp"
+            android:layout_toRightOf="@+id/feilei_menu"
+            android:id="@+id/tabLayout"
+           app:tabIndicatorHeight="5dp"
+           app:tabMode="fixed"
+            app:tabMaxWidth="50dp"
+            app:tabSelectedTextColor="#fff"
+           app:tabTextAppearance="@style/tablayoutStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        </android.support.design.widget.TabLayout>
+    </RelativeLayout>
+    <com.example.chenyunpeng.youhuo.view.MyViewPager
+        android:layout_below="@+id/topBar"
+        android:id="@+id/viewpager_feilei"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.example.chenyunpeng.youhuo.view.MyViewPager>
+
+</RelativeLayout>
