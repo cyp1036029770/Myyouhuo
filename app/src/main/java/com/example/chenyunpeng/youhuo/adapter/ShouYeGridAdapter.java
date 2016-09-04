@@ -72,8 +72,6 @@ public class ShouYeGridAdapter extends BaseAdapter {
             HomeBean.BrandBean brandBean = beanList.get(i);
             String imgpath = brandBean.getImgpath();
             Picasso.with(ctx).load(HttpModel.IMAGEHOST+imgpath).fit().error(R.mipmap.setting_network).into(ivlist.get(i));
-            Log.e("tag",""+(HttpModel.IMAGEHOST+imgpath).toString());
-
         }
         return convertView;
     }

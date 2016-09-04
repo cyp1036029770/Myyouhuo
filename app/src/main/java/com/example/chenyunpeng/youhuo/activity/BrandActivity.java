@@ -37,4 +37,9 @@ public class BrandActivity extends BaseActivity {
      addCartDiaglog.show();
  }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.translate_pinpai_in,R.anim.translate_xiangqing_out);
+    }
 }

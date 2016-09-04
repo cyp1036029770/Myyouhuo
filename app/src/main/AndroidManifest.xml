@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.BrandActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -23,6 +23,7 @@
         <activity android:name=".activity.PinPaiXiangqingActivity"></activity>
         <activity android:name=".activity.SplashActivity"></activity>
         <activity android:name=".activity.WelcomeActivity"></activity>
+       <!-- <activity android:name=".activity.BrandActivity"></activity>-->
     </application>
 
 </manifest>
