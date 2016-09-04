@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5dp"
+    android:layout_height="120dp">
+<CheckBox
+    android:layout_centerVertical="true"
+    android:id="@+id/cb"
+    android:layout_marginRight="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_toRightOf="@+id/cb"
+
+        android:src="@mipmap/setting_network"
+        android:layout_width="70dp"
+        android:layout_height="100dp" />
+<LinearLayout
+    android:layout_toRightOf="@+id/iv"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/shuliang"
+        android:layout_below="@+id/chima"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp">
+        <ImageButton
+            android:layout_marginTop="5dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/add_cart_color_diaglog_shuliang"
+            android:src="@mipmap/shopping_select_number_minus_btn_default"
+            />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/add_cart_color_diaglog_shuliang"
+            android:text="10"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+        <ImageButton
+            android:layout_marginTop="5dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/add_cart_color_diaglog_shuliang"
+            android:src="@mipmap/shopping_select_number_add_btn_default"
+            />
+
+    </LinearLayout>
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#ccc"
+        android:id="@+id/tv"
+        android:background="@drawable/add_cart_color_diaglog_shuliang"
+        android:text="asdasd"
+        android:gravity="center"
+        android:drawableRight="@mipmap/d"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp" />
+    <TextView
+        android:id="@+id/tv_price"
+        android:textSize="20sp"
+        android:textColor="#f00"
+        android:gravity="center"
+        android:text="aasdasd"
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+</LinearLayout>
+    <TextView
+        android:id="@+id/tv_num"
+        android:textSize="20sp"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="X5"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+
+</RelativeLayout>

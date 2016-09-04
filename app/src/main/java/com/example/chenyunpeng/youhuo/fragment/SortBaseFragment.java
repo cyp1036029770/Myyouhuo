@@ -15,6 +15,7 @@ import com.example.chenyunpeng.youhuo.utils.HttpUtils;
 import com.example.chenyunpeng.youhuo.view.PullToReflashGridView;
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +95,9 @@ public class SortBaseFragment extends BaseFragment implements PullToReflashGridV
         gridsort.setOnItemClickListenener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FllowGridBean.FollowBean.GoodsBean goodsBean = goodsBeanList.get(position);
                 Intent intent=new Intent(a, BrandActivity.class);
+                intent.putExtra("goods",goodsBean);
                 startActivity(intent);
                 a.overridePendingTransition(R.anim.translate_xiangqing_in,R.anim.translate_pinpai_out);
             }

@@ -3,11 +3,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".activity.GouWuCheActivity">
-    <TextView
-        android:text="gouwuche"
-        android:gravity="center"
+    <RelativeLayout
+        android:id="@+id/top"
+        android:background="#000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="?attr/actionBarSize">
+        <ImageView
+            android:onClick="back"
+            android:src="@mipmap/yoho_view_titlebar_back"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="购物车"
+            android:textColor="#fff"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:onClick="bianji"
+            android:text="编辑"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="80dp">
+        <CheckBox
+            android:id="@+id/cb"
+            android:text="全选"
+            android:gravity="center"
+            android:button="@null"
+            android:layout_centerVertical="true"
+            android:drawableTop="@drawable/select_picker_image_checkbox"
+            android:layout_width="60dp"
+            android:layout_height="70dp" />
+        <Button
+            android:id="@+id/jiesuan"
+            android:onClick="jiesuan"
+            android:background="@drawable/select_addcart"
+            android:text="结算"
+            android:layout_centerVertical="true"
+            android:textColor="#fff"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_toLeftOf="@+id/jiesuan"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_height="50dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:textSize="20sp"
+                    android:text="总计:$678.00"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="不包含邮费"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/addToShouCang"
+                android:visibility="gone"
+                android:textColor="#fff"
+                android:background="#000"
+                android:text="移入收藏夹"
+                android:layout_width="100dp"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/lv"
+        android:layout_below="@+id/top"
+        android:layout_above="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 </RelativeLayout>

@@ -1,11 +1,12 @@
 package com.example.chenyunpeng.youhuo.bena;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by chenyunpeng on 2016/9/4.
  */
-public class FllowGridBean {
+public class FllowGridBean implements Serializable {
 
     /**
      * sucessfully : ok
@@ -37,7 +38,7 @@ public class FllowGridBean {
         this.follow = follow;
     }
 
-    public static class FollowBean {
+    public static class FollowBean implements Serializable {
         private String brandname;
         private String brandimg;
         /**
@@ -73,7 +74,7 @@ public class FllowGridBean {
             this.goods = goods;
         }
 
-        public static class GoodsBean {
+        public static class GoodsBean implements Serializable{
             private String _id;
             private String price;
             private String distance;
