@@ -1,6 +1,7 @@
 package com.example.chenyunpeng.youhuo.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -123,12 +124,13 @@ public class GouWuCheActivity extends BaseActivity {
         if(bianji.getText().toString().equals("编辑")){
             adapter.setType(1);
             bianji.setText("完成");
-            adapter.notifyDataSetChanged();
+            addToShouCang.setVisibility(View.VISIBLE);
         }else {
+            Log.e("tag","zhixingle");
             adapter.setType(0);
             bianji.setText("编辑");
-            adapter.notifyDataSetChanged();
+            addToShouCang.setVisibility(View.GONE);
         }
-
+        adapter.notifyDataSetChanged();
     }
 }

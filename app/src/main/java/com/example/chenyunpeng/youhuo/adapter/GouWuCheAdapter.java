@@ -130,11 +130,12 @@ public class GouWuCheAdapter extends BaseAdapter {
     }
 
     public void setType(int type) {
-        if (type < 0) {
-            this.type = 0;
+        if (type <=0) {
+            type = 0;
         } else {
-            this.type = 1;
+           type = 1;
         }
+        this.type=type;
     }
 
     public GouWuCheAdapter(int type) {
