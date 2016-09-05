@@ -5,4 +5,7 @@ package com.example.chenyunpeng.youhuo;
  */
 public class User {
     public String id;
+    public String name;
+    public String token;
+
 }

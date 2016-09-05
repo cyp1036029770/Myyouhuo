@@ -1,11 +1,14 @@
 package com.example.chenyunpeng.youhuo.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chenyunpeng.youhuo.MyApplication;
 import com.example.chenyunpeng.youhuo.R;
@@ -19,34 +22,53 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class GouWuCheActivity extends BaseActivity {
 
-    private android.widget.RelativeLayout top;
-    private android.widget.CheckBox cb;
-    private android.widget.Button jiesuan;
-    private android.widget.TextView tvprice;
-    private android.widget.Button addToShouCang;
-    private android.widget.RelativeLayout bottom;
-    private android.widget.ListView lv;
-    private List<itemCartBean> beanList=new ArrayList<>();
+
+    @Bind(R.id.top)
+    RelativeLayout top;
+    @Bind(R.id.cb)
+    CheckBox cb;
+    @Bind(R.id.jiesuan)
+    Button jiesuan;
+    @Bind(R.id.tv_price)
+    TextView tvPrice;
+    @Bind(R.id.addToShouCang)
+    Button addToShouCang;
+    @Bind(R.id.bottom)
+    RelativeLayout bottom;
+    @Bind(R.id.lv)
+    ListView lv;
+    @Bind(R.id.back)
+    ImageView back;
+    @Bind(R.id.bianji)
+    TextView bianji;
+    private List<itemCartBean> beanList = new ArrayList();
+    private GouWuCheAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gou_wu_che);
-       initView();
+        ButterKnife.bind(this);
+
         initData();
     }
 
     private void initData() {
-        new HttpUtils().post(HttpModel.CART,"parames={\"userId\":"+ MyApplication.user.id+"}").DataCallBack(new HttpUtils.DataCallBack() {
+        showLoadDialog();
+        new HttpUtils().post(HttpModel.CART, "parames={\"userId\":" + MyApplication.user.id + "}").DataCallBack(new HttpUtils.DataCallBack() {
             @Override
             public void successful(String data) {
                 GouWuCheBean gouWuCheBean = new Gson().fromJson(data, GouWuCheBean.class);
                 List<GouWuCheBean.Cart> cart = gouWuCheBean.getCart();
-                for(int i=0;i<cart.size();i++){
+                for (int i = 0; i < cart.size(); i++) {
                     GouWuCheBean.Cart caetbean = cart.get(i);
-                    itemCartBean itemCartBean=new itemCartBean();
+                    itemCartBean itemCartBean = new itemCartBean();
                     itemCartBean.setCheck(false);
                     itemCartBean.setImgpath(caetbean.getImgpath());
                     itemCartBean.setColor(caetbean.getColor());
@@ -57,30 +79,56 @@ public class GouWuCheActivity extends BaseActivity {
                     beanList.add(itemCartBean);
                 }
 
-                GouWuCheAdapter adapter=new GouWuCheAdapter(beanList,GouWuCheActivity.this);
+                adapter = new GouWuCheAdapter(beanList, GouWuCheActivity.this);
                 lv.setAdapter(adapter);
+                dismissionLoadDialog();
             }
 
             @Override
             public void failrue(String e) {
-
+                Toast.makeText(GouWuCheActivity.this, "" + e, Toast.LENGTH_SHORT).show();
+                dismissionLoadDialog();
             }
         });
-    }
-
-    private void initView() {
-        this.lv = (ListView) findViewById(R.id.lv);
-        this.bottom = (RelativeLayout) findViewById(R.id.bottom);
-        this.addToShouCang = (Button) findViewById(R.id.addToShouCang);
-        this.tvprice = (TextView) findViewById(R.id.tv_price);
-        this.jiesuan = (Button) findViewById(R.id.jiesuan);
-        this.cb = (CheckBox) findViewById(R.id.cb);
-        this.top = (RelativeLayout) findViewById(R.id.top);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       overridePendingTransition(0,R.anim.gouwuche_out);
+        overridePendingTransition(0, R.anim.gouwuche_out);
+    }
+
+    public void back(){
+        onBackPressed();
+        finish();
+    }
+
+    @OnClick({R.id.back, R.id.bianji, R.id.jiesuan, R.id.addToShouCang})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                back();
+                break;
+            case R.id.bianji:
+                qiehuan();
+                break;
+            case R.id.jiesuan:
+                break;
+            case R.id.addToShouCang:
+                break;
+        }
+    }
+
+    private void qiehuan() {
+        if(bianji.getText().toString().equals("编辑")){
+            adapter.setType(1);
+            bianji.setText("完成");
+            adapter.notifyDataSetChanged();
+        }else {
+            adapter.setType(0);
+            bianji.setText("编辑");
+            adapter.notifyDataSetChanged();
+        }
+
     }
 }

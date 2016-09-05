@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -33,7 +34,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     HashMap<String, Fragment> fragmentHashMap = new HashMap<>();
     private List<MyRadioButton> radioButtonList;
     private String fragmentTag = "";
-    private String ccurrentTag = "";
+    private String ccurrentTag = ShouyeFragment.class.getSimpleName();
+    private boolean onSave=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         this.guang = (MyRadioButton) findViewById(R.id.guang);
         this.feilei = (MyRadioButton) findViewById(R.id.feilei);
         this.shouye = (MyRadioButton) findViewById(R.id.shouye);
-         shouye.setOnClickListener(this);
+        shouye.setOnClickListener(this);
         feilei.setOnClickListener(this);
         guang.setOnClickListener(this);
         gouwuche.setOnClickListener(this);
@@ -62,6 +64,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void initRadioList() {
         radioButtonList = new ArrayList<>();
+        radioButtonList.add(mine);
+        radioButtonList.add(guang);
+        radioButtonList.add(shouye);
+        radioButtonList.add(feilei);
+        radioButtonList.add(gouwuche);
 
 
     }
@@ -105,7 +112,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.gouwuche:
                 //此处需要判断是否登陆,如果未登录切换的是fragment,登录后切换的是fragment
-                replaceFragment(GouWuCheFragment.class.getSimpleName());
+                if (MyApplication.user != null) {
+                    //表示已经登陆
+                    onSave = true;
+                    statGouwuChe();
+                    fragmentTag="";
+                } else {
+                    replaceFragment(GouWuCheFragment.class.getSimpleName());
+                }
                 break;
             case R.id.mine:
                 replaceFragment(MineFragment.class.getSimpleName());
@@ -117,5 +131,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private void statGouwuChe() {
         startActivity(new Intent(MainActivity.this, GouWuCheActivity.class));
         overridePendingTransition(R.anim.gouwuche_in, 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (onSave) {
+            onSave = false;
+            getCurrentRadio(ccurrentTag).performClick();
+        }
+    }
+
+    private View getCurrentRadio(String ccurrentTag) {
+        for (MyRadioButton myRadioButton : radioButtonList) {
+            if (ccurrentTag.equals(myRadioButton.getTag())) {
+                return myRadioButton;
+            }
+        }
+        return null;
     }
 }

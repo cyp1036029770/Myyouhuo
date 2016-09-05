@@ -56,17 +56,18 @@ public class GouWuCheAdapter extends BaseAdapter {
             if (itemViewType == 0) {
                 convertView = View.inflate(context, R.layout.item_cart_normal, null);
                 holder = new normalViewHolder(convertView);
-            } else {
+                convertView.setTag(holder);
+            } else if(itemViewType==1){
                 convertView = View.inflate(context, R.layout.item_cart_selected, null);
                 holder = new SelectViewHolder(convertView);
+                convertView.setTag(holder);
             }
-            convertView.setTag(holder);
         }else {
          holder= (ViewHolder) convertView.getTag();
         }
         if(itemViewType==0){
             BindNormal(holder,position);
-        }else {
+        }else if(itemViewType==1){
             BindSelect(holder,position);
         }
 
@@ -130,10 +131,14 @@ public class GouWuCheAdapter extends BaseAdapter {
 
     public void setType(int type) {
         if (type < 0) {
-            type = 0;
+            this.type = 0;
         } else {
-            type = 1;
+            this.type = 1;
         }
+    }
+
+    public GouWuCheAdapter(int type) {
+        this.type = type;
     }
 
     static class normalViewHolder extends ViewHolder {
