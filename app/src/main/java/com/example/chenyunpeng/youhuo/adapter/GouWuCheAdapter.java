@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import butterknife.ButterKnife;
 public class GouWuCheAdapter extends BaseAdapter {
     private List<itemCartBean> list;
     private Context context;
+
 
     public GouWuCheAdapter(List<itemCartBean> list, Context context) {
         this.list = list;
@@ -88,6 +90,7 @@ public class GouWuCheAdapter extends BaseAdapter {
 
             }
         });
+
         selectViewHolder.cb.setChecked(list.get(position).isCheck());
        selectViewHolder.tv.setText(cart.getTitle()+"");
         selectViewHolder.tvNum.setText(cart.getNum());
@@ -108,6 +111,7 @@ public class GouWuCheAdapter extends BaseAdapter {
 
             }
         });
+
         normalViewHolder.cb.setChecked(list.get(position).isCheck());
         normalViewHolder.tv.setText("颜色:" + cart.getColor() + " 尺寸:" + cart.getSize());
         normalViewHolder.tvNum.setText(cart.getNum());
@@ -182,4 +186,7 @@ public class GouWuCheAdapter extends BaseAdapter {
   static class  ViewHolder{
 
     }
+
+
+
 }

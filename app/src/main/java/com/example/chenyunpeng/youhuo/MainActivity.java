@@ -114,8 +114,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 //此处需要判断是否登陆,如果未登录切换的是fragment,登录后切换的是fragment
                 if (MyApplication.user != null) {
                     //表示已经登陆
-                    onSave = true;
                     statGouwuChe();
+                    onSave = true;
                     fragmentTag="";
                 } else {
                     replaceFragment(GouWuCheFragment.class.getSimpleName());

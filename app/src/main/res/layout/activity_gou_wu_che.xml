@@ -46,7 +46,8 @@
             android:layout_centerVertical="true"
             android:drawableTop="@drawable/select_picker_image_checkbox"
             android:layout_width="60dp"
-            android:layout_height="70dp" />
+            android:layout_height="70dp"
+            android:checked="false" />
         <Button
             android:id="@+id/jiesuan"
             android:onClick="jiesuan"
