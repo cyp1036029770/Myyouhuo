@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/group"
     tools:context=".activity.BrandActivity">
 <RelativeLayout
     android:id="@+id/toolbar"
@@ -94,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
+                    android:id="@+id/pager_brand"
                     android:layout_width="match_parent"
                     android:layout_height="600dp">
                 </android.support.v4.view.ViewPager>

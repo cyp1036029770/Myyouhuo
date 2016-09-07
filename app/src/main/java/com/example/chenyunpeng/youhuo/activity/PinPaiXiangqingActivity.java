@@ -2,15 +2,16 @@ package com.example.chenyunpeng.youhuo.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chenyunpeng.youhuo.R;
-import com.example.chenyunpeng.youhuo.diaglog.ShareDiaglog;
+import com.example.chenyunpeng.youhuo.bena.AllBannerBean;
 import com.example.chenyunpeng.youhuo.fragment.PinpaijieshaoFragment;
 import com.example.chenyunpeng.youhuo.fragment.XiangqingFragment;
 
@@ -22,7 +23,7 @@ public class PinPaiXiangqingActivity extends BaseActivity {
     @Bind(R.id.back_toobar)
     ImageButton backToobar;
     @Bind(R.id.title_tv_toobar)
-    Button titleTvToobar;
+    TextView titleTvToobar;
     @Bind(R.id.title_iv_toobar)
     ImageView titleIvToobar;
     @Bind(R.id.select_toolbar)
@@ -35,17 +36,23 @@ public class PinPaiXiangqingActivity extends BaseActivity {
     RelativeLayout group;
     private PinpaijieshaoFragment pinpaijieshaoFragment;
     private FragmentManager manager;
-
-
+    public AllBannerBean.BrandBean bean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        super.setContentView(R.layout.activity_pin_pai_xiangqing);
+        setContentView(R.layout.activity_pin_pai_xiangqing);
+        ButterKnife.bind(this);
+        bean = (AllBannerBean.BrandBean) getIntent().getSerializableExtra("bean");
+        String name = bean.getName();
 
+        if(!TextUtils.isEmpty(name)){
+            Log.e("tag",""+name.toString());
+           titleTvToobar.setText(name+"");
+
+        }
         initFragment();
         initListener();
     }
-
     private void initListener() {
         titleTvToobar.setOnClickListener(new View.OnClickListener() {
             @Override

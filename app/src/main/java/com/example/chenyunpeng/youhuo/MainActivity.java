@@ -18,6 +18,10 @@ import com.example.chenyunpeng.youhuo.fragment.MineFragment;
 import com.example.chenyunpeng.youhuo.fragment.ShouyeFragment;
 import com.example.chenyunpeng.youhuo.view.MyRadioButton;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,9 +45,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);
         initView();
         initFragment();
         initRadioList();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public  void addCartEvent(int num){
+        gouwuche.setRedDotText(num);
     }
 
     private void initView() {
@@ -138,7 +153,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onResume();
         if (onSave) {
             onSave = false;
-            getCurrentRadio(ccurrentTag).performClick();
+            Log.e("tag",""+ccurrentTag);
+            MyRadioButton currentRadio = (MyRadioButton) getCurrentRadio(ccurrentTag);
+            if(currentRadio!=null){
+                currentRadio.performClick();
+            }
+
         }
     }
 
@@ -149,5 +169,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         }
         return null;
+    }
+    public  void saomiao(View view){
+        //saomiao erweima
     }
 }

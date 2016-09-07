@@ -10,7 +10,8 @@ import com.example.chenyunpeng.youhuo.utils.SPutils;
  */
 public class MyApplication extends Application {
     public  static  MyApplication app;
-    public static  User user;
+    public static  User user=new User();
+    public  static int  count;
 
     @Override
     public void onCreate() {

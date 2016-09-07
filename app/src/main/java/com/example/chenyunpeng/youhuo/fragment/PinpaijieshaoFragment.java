@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import com.example.chenyunpeng.youhuo.R;
 /**
@@ -24,11 +27,15 @@ public class PinpaijieshaoFragment extends BaseFragment {
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
-        TextView tv=new TextView(a);
-        tv.setText("ssssssssssssssssssssssssssssssssssssssssss");
-        tv.setTextSize(100);
-        tv.setBackgroundColor(Color.WHITE);
-        return tv;
+        WebView wv=new WebView(a);
+       wv.setWebViewClient(new WebViewClient(){
+           @Override
+           public boolean shouldOverrideUrlLoading(WebView view, String url) {
+               return true;
+           }
+       });
+        wv.loadUrl("www.baidu.com");
+        return  wv;
     }
 
     @Override

@@ -6,6 +6,7 @@
     android:background="#ccc"
     tools:context="com.example.chenyunpeng.youhuo.activity.LoginActivity">
 <RelativeLayout
+    android:id="@+id/logingroup"
     android:layout_centerInParent="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -35,4 +36,18 @@
         android:layout_below="@+id/pasword"
         />
 </RelativeLayout>
+    <Button
+        android:id="@+id/qqlogin"
+        android:layout_below="@+id/logingroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="qq登陆"
+        />
+    <Button
+    android:id="@+id/sina_login"
+        android:layout_below="@+id/qqlogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sina"
+        />
 </RelativeLayout>

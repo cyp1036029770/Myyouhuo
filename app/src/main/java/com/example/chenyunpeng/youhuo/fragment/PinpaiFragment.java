@@ -160,9 +160,9 @@ public class PinpaiFragment extends BaseFragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 BrandBean bean = letterBeanList.get(groupPosition).getList().get(childPosition);
-
                //注意此处需要向活动发送一个bena,
                 Intent intent=new Intent(a, PinPaiXiangqingActivity.class);
+                intent.putExtra("bean",bean);
                 startActivity(intent);
                 a.overridePendingTransition(R.anim.translate_xiangqing_in,R.anim.translate_pinpai_out);
                 return true;

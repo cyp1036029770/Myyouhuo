@@ -3,35 +3,57 @@ package com.example.chenyunpeng.youhuo.activity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.example.chenyunpeng.youhuo.MyApplication;
 import com.example.chenyunpeng.youhuo.R;
 import com.example.chenyunpeng.youhuo.User;
 import com.example.chenyunpeng.youhuo.utils.SPutils;
+import com.mob.tools.utils.UIHandler;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+import java.util.HashMap;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
+
+public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener {
 
     private android.support.design.widget.TextInputEditText account;
     private android.support.design.widget.TextInputEditText pasword;
     private android.widget.Button login;
+    private android.widget.RelativeLayout logingroup;
+    private Button qqlogin;
+    private Button sinalogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         initView();
 
     }
 
     private void initView() {
+        this.sinalogin = (Button) findViewById(R.id.sina_login);
+        this.qqlogin = (Button) findViewById(R.id.qqlogin);
+        this.logingroup = (RelativeLayout) findViewById(R.id.logingroup);
+        this.login = (Button) findViewById(R.id.login);
+        this.pasword = (TextInputEditText) findViewById(R.id.pasword);
+        this.account = (TextInputEditText) findViewById(R.id.account);
         this.login = (Button) findViewById(R.id.login);
         this.pasword = (TextInputEditText) findViewById(R.id.pasword);
         this.account = (TextInputEditText) findViewById(R.id.account);
         login.setOnClickListener(this);
+        sinalogin.setOnClickListener(this);
+        qqlogin.setOnClickListener(this);
     }
 
     @Override
@@ -46,11 +68,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             user.upDateTime=60*1000*60*24*30;
             SPutils.save("loggin",(user.upDateTime+user.currentTime)+"");
             MyApplication.user=user;
-            Snackbar.make(v,"登陆成功",Snackbar.LENGTH_LONG).show();
+           // Snackbar.make(v,"登陆成功",Snackbar.LENGTH_LONG).show();
             onBackPressed();
         }else {
-           Snackbar.make(v,"账号或密码错误,请重新登陆",Snackbar.LENGTH_SHORT).show();
-  /*     toast("登陆失败");*/
+           //Snackbar.make(v,"账号或密码错误,请重新登陆",Snackbar.LENGTH_SHORT).show();
+       toast("登陆失败");
         }
     }
 
@@ -58,5 +80,40 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.fade_in_choose,R.anim.fade_out_boys);
+    }
+
+    public  void onClickLogin(View view){
+      if(view.getId()==R.id.sina_login){
+          ShareSDK.initSDK(this);
+          Platform wechat= ShareSDK.getPlatform(this, SinaWeibo.NAME);
+          wechat.SSOSetting(false);
+          wechat.setPlatformActionListener(this);
+          wechat.authorize();
+          String userIcon = wechat.getDb().getUserIcon();
+          Log.e("tag",""+userIcon);
+      }else if(view.getId()==R.id.qqlogin){
+          ShareSDK.initSDK(this);
+          Platform wechat= ShareSDK.getPlatform(this, QQ.NAME);
+          wechat.setPlatformActionListener(this);
+          wechat.SSOSetting(false);
+          wechat.authorize();
+          String userIcon = wechat.getDb().getUserIcon();
+          Log.e("tag",""+userIcon);
+      }
+    }
+
+    @Override
+    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        toast("分享完成");
+    }
+
+    @Override
+    public void onError(Platform platform, int i, Throwable throwable) {
+toast("分享失败");
+    }
+
+    @Override
+    public void onCancel(Platform platform, int i) {
+toast("取消分享");
     }
 }

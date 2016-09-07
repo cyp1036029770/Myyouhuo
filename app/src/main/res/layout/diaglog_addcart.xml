@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/search_circle"
     android:padding="10dp"
-    android:layout_height="400dp">
+    android:layout_height="340dp">
     <ImageView
         android:id="@+id/cart_iv"
         android:layout_width="50dp"
@@ -58,7 +59,8 @@
             android:layout_width="0dp"
             android:layout_marginLeft="10dp"
             android:text="白色"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:checked="false" />
 
         <RadioButton
             android:background="@drawable/add_cart_color_diaglog"
@@ -113,7 +115,8 @@
                 android:layout_width="0dp"
                 android:layout_marginLeft="10dp"
                 android:text="F"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:checked="false" />
             <RadioButton
                 android:background="@drawable/add_cart_color_diaglog"
                 android:gravity="center"
@@ -168,7 +171,7 @@
            android:text="10"
             android:textSize="20sp"
             android:gravity="center"
-            />
+            android:id="@+id/num" />
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"

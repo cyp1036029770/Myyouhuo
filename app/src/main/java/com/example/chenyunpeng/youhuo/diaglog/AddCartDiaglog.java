@@ -2,6 +2,8 @@ package com.example.chenyunpeng.youhuo.diaglog;
 
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +13,21 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.chenyunpeng.youhuo.MyApplication;
 import com.example.chenyunpeng.youhuo.R;
 import com.example.chenyunpeng.youhuo.bena.BranBean;
 import com.example.chenyunpeng.youhuo.bena.FllowGridBean;
 import com.example.chenyunpeng.youhuo.bena.HomeBean;
 import com.example.chenyunpeng.youhuo.bena.HttpModel;
+import com.example.chenyunpeng.youhuo.event.addCartEvent;
 import com.example.chenyunpeng.youhuo.utils.Dp2Px;
 import com.squareup.picasso.Picasso;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.nio.channels.ScatteringByteChannel;
 import java.util.List;
 
 /**
@@ -45,6 +53,8 @@ public class AddCartDiaglog extends BaseDiaglog implements View.OnClickListener 
     protected LinearLayout addorjian;
     private TextView shengyu;
     private Button queding;
+    private TextView num;
+    private OnDisMissListenner listenner;
 
     public AddCartDiaglog(Context context, BranBean branBean) {
         super(context);
@@ -53,21 +63,28 @@ public class AddCartDiaglog extends BaseDiaglog implements View.OnClickListener 
         initView(inflate);
         getWindow().getDecorView().setPadding(0, 0, 0, 0);
         getWindow().setGravity(Gravity.BOTTOM);
-        inflate.measure(0, View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2, View.MeasureSpec.AT_MOST));
-        getWindow().setLayout(width,inflate.getMeasuredHeight());
+       // inflate.measure(0, View.MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2, View.MeasureSpec.AT_MOST));
+        getWindow().setLayout(width,Dp2Px.dp2px(340));
         getWindow().setWindowAnimations(R.style.addcart_diaglog);
+
         init(branBean);
     }
 
     private void init(BranBean branBean) {
+        rb1.setChecked(true);
         String imgpath = branBean.getImg().get(0).getImgpath();
-        Picasso.with(getContext()).load(HttpModel.IMAGEHOST+imgpath).fit().into(cartIv);
-        cartTv1.setText(branBean.getGoods().get(0).getTitle());
-        cartTv2.setText(branBean.getGoods().get(0).getPrice());
+        if(TextUtils.isEmpty(branBean.toString())){
+            Picasso.with(getContext()).load(HttpModel.IMAGEHOST+imgpath).fit().into(cartIv);
+            cartTv1.setText(branBean.getGoods().get(0).getTitle());
+            cartTv2.setText(branBean.getGoods().get(0).getPrice());
+        }else {
+            Toast.makeText(a,"数据加载异常",Toast.LENGTH_SHORT).show();
+        }
     }
 
 
     private void initView(View rootView) {
+        num = (TextView) rootView.findViewById(R.id.num);
         shengyu = (TextView) rootView.findViewById(R.id.shengyu);
         cartIv = (ImageView) rootView.findViewById(R.id.cart_iv);
         cartTv1 = (TextView) rootView.findViewById(R.id.cart_tv1);
@@ -91,6 +108,24 @@ public class AddCartDiaglog extends BaseDiaglog implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        dismiss();
+        //判断是否选中商品的参数
+        if(rb1Chima.isChecked()||rb2Chima.isChecked()||rb3Chima.isChecked()){
+            String s = num.getText().toString();
+            Integer integer = Integer.valueOf(s);
+            if(listenner!=null){
+                listenner.dismiss(integer);
+            }
+            dismiss();
+        }else {
+            Toast.makeText(getContext(),"请选择尺码",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public interface  OnDisMissListenner{
+        void dismiss(int num);
+    }
+    public  void setOnDisMissListenner(OnDisMissListenner listenner){
+        this.listenner=listenner;
     }
 }
+

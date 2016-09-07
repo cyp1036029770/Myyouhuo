@@ -41,7 +41,7 @@ public class AllBannerBean implements Serializable {
         this.brand = brand;
     }
 
-    public static class BrandBean {
+    public static class BrandBean implements Serializable{
         private String _id;
         private String name;
         private String value;

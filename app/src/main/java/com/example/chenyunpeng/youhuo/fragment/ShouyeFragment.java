@@ -1,6 +1,5 @@
 package com.example.chenyunpeng.youhuo.fragment;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.chenyunpeng.youhuo.R;
@@ -31,7 +29,7 @@ import java.util.List;
 /**
  * Created by chenyunpeng on 2016/8/23.
  */
-public class ShouyeFragment extends BaseFragment implements MyPullToReflash.PullToRelashListener {
+public class ShouyeFragment extends BaseFragment implements MyPullToReflash.PullToRelashListener, View.OnClickListener {
     protected ImageButton toolbarMenu;
     protected ImageButton toolbarSearch;
     protected ImageButton toolbarProductBacklook;
@@ -40,7 +38,9 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
     private MyPullToReflash lv;
     private List<String> stringList;
     private ArrayAdapter<String> adapter;
-    List<List<HomeBean.BrandBean>> beanList=new ArrayList<>();
+    List<List<HomeBean.BrandBean>> beanList = new ArrayList<>();
+    private ImageButton productbacklook;
+
 
     @Override
     protected void initData() {
@@ -77,6 +77,7 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View inflate = inflater.inflate(R.layout.fragment_shouye, container, false);
+
         init(inflate);
         return inflate;
 
@@ -84,9 +85,11 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
     }
 
     private void init(View rootView) {
+        productbacklook = (ImageButton) rootView.findViewById(R.id.toolbar_product_backlook);
         toolbarMenu = (ImageButton) rootView.findViewById(R.id.toolbar_menu);
         toolbarSearch = (ImageButton) rootView.findViewById(R.id.toolbar_search);
         toolbarProductBacklook = (ImageButton) rootView.findViewById(R.id.toolbar_product_backlook);
+        productbacklook.setOnClickListener(this);
         lv = (MyPullToReflash) rootView.findViewById(R.id.lv_home);
         lv.setOnPullToRelashListener(this);
         initHead();
@@ -150,5 +153,10 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
                 lv.setLoadSuccess();
             }
         }, 2000);
+    }
+
+    @Override
+    public void onClick(View v) {
+        
     }
 }

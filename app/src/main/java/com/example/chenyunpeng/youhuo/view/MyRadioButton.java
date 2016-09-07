@@ -72,6 +72,9 @@ public class MyRadioButton extends RadioButton {
         int textHeight = rect.height();
        canvas.drawText(text,width/4*3-v/2,height/4+textPaint.getTextSize()/3,textPaint);
     }
+    public  void setRedDotText(int  num){
+        this.circleText=num;
+    }
 
 
 }

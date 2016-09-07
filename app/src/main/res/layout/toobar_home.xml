@@ -31,6 +31,7 @@
           android:src="@mipmap/homepage_logo"
         />
     <ImageButton
+        android:onClick="saomiao"
         android:background="@null"
         android:id="@+id/toolbar_product_backlook"
         android:layout_width="wrap_content"
