@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_height="match_parent">
+    <com.example.chenyunpeng.share.MyGridView
+        android:id="@+id/gv"
+        android:numColumns="3"
+        android:background="@drawable/btn_shape"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+    </com.example.chenyunpeng.share.MyGridView>
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/quxiao"
+        android:textSize="20sp"
+        android:background="@drawable/btn_shape"
+        android:text="取消"
+        android:layout_marginBottom="20dp"
+        />
+</LinearLayout>
