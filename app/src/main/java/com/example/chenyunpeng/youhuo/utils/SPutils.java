@@ -13,4 +13,7 @@ public class SPutils {
     public  static String get(String key){
         return  MyApplication.app.getSharedPreferences("config",0).getString(key,"");
     }
+    public static void clear(String key){
+        MyApplication.app.getSharedPreferences("config",0).edit().remove(key).commit();
+    }
 }

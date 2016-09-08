@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 
 import com.example.chenyunpeng.youhuo.activity.BaseActivity;
@@ -17,6 +19,7 @@ import com.example.chenyunpeng.youhuo.fragment.GuangFragment;
 import com.example.chenyunpeng.youhuo.fragment.MineFragment;
 import com.example.chenyunpeng.youhuo.fragment.ShouyeFragment;
 import com.example.chenyunpeng.youhuo.view.MyRadioButton;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,6 +28,10 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import cn.bmob.push.BmobPush;
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobInstallation;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RadioGroup buttonGroup;
@@ -40,12 +47,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private String fragmentTag = "";
     private String ccurrentTag = ShouyeFragment.class.getSimpleName();
     private boolean onSave=false;
+    private ImageButton saomiao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
+        Bmob.initialize(this, "a7acaa6fad27b4e7c1b94b85c6100d82");
+        // 使用推送服务时的初始化操作
+        BmobInstallation.getCurrentInstallation().save();
+        // 启动推送服务
+        BmobPush.startWork(this);
         initView();
         initFragment();
         initRadioList();
@@ -69,11 +82,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         this.guang = (MyRadioButton) findViewById(R.id.guang);
         this.feilei = (MyRadioButton) findViewById(R.id.feilei);
         this.shouye = (MyRadioButton) findViewById(R.id.shouye);
+
         shouye.setOnClickListener(this);
         feilei.setOnClickListener(this);
         guang.setOnClickListener(this);
         gouwuche.setOnClickListener(this);
         mine.setOnClickListener(this);
+       // saomiao.setOnClickListener(this);
 
     }
 
@@ -84,6 +99,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         radioButtonList.add(shouye);
         radioButtonList.add(feilei);
         radioButtonList.add(gouwuche);
+        gouwuche.setRedDotText(MyApplication.count);
 
 
     }
@@ -139,6 +155,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.mine:
                 replaceFragment(MineFragment.class.getSimpleName());
                 break;
+           /* case R.id.toolbar_product_backlook:
+                saomiao(null);
+                break;*/
         }
     }
 
@@ -154,10 +173,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if (onSave) {
             onSave = false;
             Log.e("tag",""+ccurrentTag);
+
             MyRadioButton currentRadio = (MyRadioButton) getCurrentRadio(ccurrentTag);
-            if(currentRadio!=null){
                 currentRadio.performClick();
-            }
 
         }
     }
@@ -170,7 +188,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
         return null;
     }
-    public  void saomiao(View view){
-        //saomiao erweima
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("result");
+            toast(scanResult);
+        }
     }
 }

@@ -18,6 +18,7 @@ import java.util.HashMap;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.PlatformDb;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
@@ -36,7 +37,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         initView();
 
     }
@@ -67,6 +67,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
            user.currentTime= System.currentTimeMillis();
             user.upDateTime=60*1000*60*24*30;
             SPutils.save("loggin",(user.upDateTime+user.currentTime)+"");
+            Log.e("tag",""+SPutils.get("loggin").toString());
             MyApplication.user=user;
            // Snackbar.make(v,"登陆成功",Snackbar.LENGTH_LONG).show();
             onBackPressed();
@@ -85,26 +86,40 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public  void onClickLogin(View view){
       if(view.getId()==R.id.sina_login){
           ShareSDK.initSDK(this);
-          Platform wechat= ShareSDK.getPlatform(this, SinaWeibo.NAME);
-          wechat.SSOSetting(false);
-          wechat.setPlatformActionListener(this);
-          wechat.authorize();
-          String userIcon = wechat.getDb().getUserIcon();
-          Log.e("tag",""+userIcon);
+          Platform sina= ShareSDK.getPlatform(this, SinaWeibo.NAME);
+          sina.SSOSetting(false);
+          sina.authorize();
+          sina.setPlatformActionListener(this);
       }else if(view.getId()==R.id.qqlogin){
           ShareSDK.initSDK(this);
           Platform wechat= ShareSDK.getPlatform(this, QQ.NAME);
-          wechat.setPlatformActionListener(this);
+
           wechat.SSOSetting(false);
           wechat.authorize();
-          String userIcon = wechat.getDb().getUserIcon();
-          Log.e("tag",""+userIcon);
+          wechat.setPlatformActionListener(this);
+          /*String userIcon = wechat.getDb().getUserIcon();
+          Log.e("tag",""+userIcon);*/
       }
     }
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        String userIcon = platform.getDb().getUserIcon();
+        Log.e("tag",""+userIcon.toString());
+        LoginState(platform);
         toast("分享完成");
+    }
+
+    private void LoginState(Platform platform) {
+        PlatformDb db = platform.getDb();
+        MyApplication.user.upDateTime=db.getExpiresTime();
+        MyApplication.user.currentTime=System.currentTimeMillis();
+        MyApplication.user.id=db.getUserId();
+        MyApplication.user.token=db.getToken();
+        MyApplication.user.headImage=db.getUserIcon();
+        MyApplication.user.name=db.getUserName();
+        SPutils.clear("loggin");
+        SPutils.save("loggin",(db.getExpiresTime()+System.currentTimeMillis())+"");
     }
 
     @Override

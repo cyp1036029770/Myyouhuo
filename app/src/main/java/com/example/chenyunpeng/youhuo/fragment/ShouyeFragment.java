@@ -1,5 +1,7 @@
 package com.example.chenyunpeng.youhuo.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.example.chenyunpeng.youhuo.view.MyBanner;
 import com.example.chenyunpeng.youhuo.view.MyGridView;
 import com.example.chenyunpeng.youhuo.view.MyPullToReflash;
 import com.google.gson.Gson;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +35,6 @@ import java.util.List;
 public class ShouyeFragment extends BaseFragment implements MyPullToReflash.PullToRelashListener, View.OnClickListener {
     protected ImageButton toolbarMenu;
     protected ImageButton toolbarSearch;
-    protected ImageButton toolbarProductBacklook;
     private MyGridView gv;
     private MyBanner banner;
     private MyPullToReflash lv;
@@ -88,7 +90,6 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
         productbacklook = (ImageButton) rootView.findViewById(R.id.toolbar_product_backlook);
         toolbarMenu = (ImageButton) rootView.findViewById(R.id.toolbar_menu);
         toolbarSearch = (ImageButton) rootView.findViewById(R.id.toolbar_search);
-        toolbarProductBacklook = (ImageButton) rootView.findViewById(R.id.toolbar_product_backlook);
         productbacklook.setOnClickListener(this);
         lv = (MyPullToReflash) rootView.findViewById(R.id.lv_home);
         lv.setOnPullToRelashListener(this);
@@ -157,6 +158,13 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
 
     @Override
     public void onClick(View v) {
-        
+        saomiao();
     }
+    public  void saomiao(){
+        Log.e("tagggggg","dianjiewole");
+        Intent openCameraIntent = new Intent(a, CaptureActivity.class);
+        startActivityForResult(openCameraIntent, 0);
+    }
+
+
 }
