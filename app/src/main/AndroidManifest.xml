@@ -36,8 +36,9 @@
         <activity android:name=".activity.BrandActivity" />
         <activity android:name=".activity.WelcomeActivity" />
         <!-- <activity android:name=".MainActivity" /> -->
+        <activity android:name=".activity.ZhiFuActivity"></activity>
         <activity android:name=".activity.BaseActivity" />
-        <!-- <activity android:name=".activity.LoginActivity"></activity> -->
+         <activity android:name=".activity.LoginActivity"></activity>
 
 
         <service

@@ -43,12 +43,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private com.example.chenyunpeng.youhuo.view.MyRadioButton gouwuche;
     private com.example.chenyunpeng.youhuo.view.MyRadioButton mine;
     HashMap<String, Fragment> fragmentHashMap = new HashMap<>();
-    private List<MyRadioButton> radioButtonList;
-    private String fragmentTag = "";
-    private String ccurrentTag = ShouyeFragment.class.getSimpleName();
+    private List<MyRadioButton> radioButtonList = new ArrayList<>();;
+    private String fragmentTag="";
+    private String ccurrentTag="";
     private boolean onSave=false;
-    private ImageButton saomiao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         BmobInstallation.getCurrentInstallation().save();
         // 启动推送服务
         BmobPush.startWork(this);
+        manager = getSupportFragmentManager();
         initView();
         initFragment();
         initRadioList();
@@ -82,18 +81,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         this.guang = (MyRadioButton) findViewById(R.id.guang);
         this.feilei = (MyRadioButton) findViewById(R.id.feilei);
         this.shouye = (MyRadioButton) findViewById(R.id.shouye);
-
+         mine.setTag(MineFragment.class.getSimpleName());
+        gouwuche.setTag(GouWuCheFragment.class.getSimpleName());
+        guang.setTag(GuangFragment.class.getSimpleName());
+        feilei.setTag(FeileiFragment.class.getSimpleName());
+        shouye.setTag(ShouyeFragment.class.getSimpleName());
         shouye.setOnClickListener(this);
         feilei.setOnClickListener(this);
         guang.setOnClickListener(this);
         gouwuche.setOnClickListener(this);
         mine.setOnClickListener(this);
-       // saomiao.setOnClickListener(this);
-
     }
-
     private void initRadioList() {
-        radioButtonList = new ArrayList<>();
         radioButtonList.add(mine);
         radioButtonList.add(guang);
         radioButtonList.add(shouye);
@@ -105,12 +104,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initFragment() {
-        manager = getSupportFragmentManager();
+
         fragmentHashMap.put(ShouyeFragment.class.getSimpleName(), new ShouyeFragment());
         fragmentHashMap.put(FeileiFragment.class.getSimpleName(), new FeileiFragment());
         fragmentHashMap.put(GuangFragment.class.getSimpleName(), new GuangFragment());
         fragmentHashMap.put(MineFragment.class.getSimpleName(), new MineFragment());
-        fragmentHashMap.put(GouWuCheFragment.class.getSimpleName(), new GouWuCheFragment());
+       fragmentHashMap.put(GouWuCheFragment.class.getSimpleName(), new GouWuCheFragment());
         replaceFragment(ShouyeFragment.class.getSimpleName());
     }
 
@@ -142,15 +141,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 replaceFragment(GuangFragment.class.getSimpleName());
                 break;
             case R.id.gouwuche:
-                //此处需要判断是否登陆,如果未登录切换的是fragment,登录后切换的是fragment
-                if (MyApplication.user != null) {
+                  //此处需要判断是否登陆,如果未登录切换的是fragment,登录后切换的是fragment
+            if (MyApplication.user != null) {
                     //表示已经登陆
                     statGouwuChe();
                     onSave = true;
                     fragmentTag="";
-                } else {
-                    replaceFragment(GouWuCheFragment.class.getSimpleName());
+              } else {
+                replaceFragment(GouWuCheFragment.class.getSimpleName());
                 }
+               /*
+                statGouwuChe();
+                onSave = true;
+                fragmentTag="";*/
                 break;
             case R.id.mine:
                 replaceFragment(MineFragment.class.getSimpleName());
@@ -172,14 +175,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onResume();
         if (onSave) {
             onSave = false;
-            Log.e("tag",""+ccurrentTag);
-
-            MyRadioButton currentRadio = (MyRadioButton) getCurrentRadio(ccurrentTag);
-                currentRadio.performClick();
-
+            getCurrentRadio(ccurrentTag).performClick();
+          //  currentRadio.performClick();
         }
     }
-
     private View getCurrentRadio(String ccurrentTag) {
         for (MyRadioButton myRadioButton : radioButtonList) {
             if (ccurrentTag.equals(myRadioButton.getTag())) {

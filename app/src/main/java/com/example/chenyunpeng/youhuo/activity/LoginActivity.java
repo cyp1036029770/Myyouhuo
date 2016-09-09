@@ -80,34 +80,55 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.fade_in_choose,R.anim.fade_out_boys);
+        overridePendingTransition(R.anim.mine_enter,R.anim.out_login);
     }
 
     public  void onClickLogin(View view){
       if(view.getId()==R.id.sina_login){
           ShareSDK.initSDK(this);
           Platform sina= ShareSDK.getPlatform(this, SinaWeibo.NAME);
-          sina.SSOSetting(false);
+          sina.SSOSetting(true);
           sina.authorize();
           sina.setPlatformActionListener(this);
       }else if(view.getId()==R.id.qqlogin){
-          ShareSDK.initSDK(this);
           Platform wechat= ShareSDK.getPlatform(this, QQ.NAME);
-
+           authorize(wechat);
+        /*  ShareSDK.initSDK(this);
+          Platform wechat= ShareSDK.getPlatform(this, QQ.NAME);
+     authorize()
           wechat.SSOSetting(false);
           wechat.authorize();
           wechat.setPlatformActionListener(this);
-          /*String userIcon = wechat.getDb().getUserIcon();
+          *//*String userIcon = wechat.getDb().getUserIcon();
           Log.e("tag",""+userIcon);*/
       }
     }
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+     //   authorize(platform);
         String userIcon = platform.getDb().getUserIcon();
         Log.e("tag",""+userIcon.toString());
         LoginState(platform);
         toast("分享完成");
+    }
+
+    private void authorize(Platform plat) {
+        if (plat == null) {
+            return;
+        }
+
+        if(plat.isAuthValid()) {
+            String userId = plat.getDb().getUserId();
+            if (userId != null) {
+           Log.e("tag",""+userId.toString());
+                return;
+            }
+        }
+        plat.setPlatformActionListener(this);
+        plat.SSOSetting(false);
+        //获取用户资料
+            plat.authorize();
     }
 
     private void LoginState(Platform platform) {

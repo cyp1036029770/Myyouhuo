@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.example.chenyunpeng.youhuo.R;
 import com.example.chenyunpeng.youhuo.adapter.HomeGridviewAdapter;
@@ -42,6 +44,9 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
     private ArrayAdapter<String> adapter;
     List<List<HomeBean.BrandBean>> beanList = new ArrayList<>();
     private ImageButton productbacklook;
+    private ImageView iv1;
+    private ImageView iv2;
+    private ViewFlipper vf;
 
 
     @Override
@@ -79,7 +84,6 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View inflate = inflater.inflate(R.layout.fragment_shouye, container, false);
-
         init(inflate);
         return inflate;
 
@@ -90,6 +94,13 @@ public class ShouyeFragment extends BaseFragment implements MyPullToReflash.Pull
         productbacklook = (ImageButton) rootView.findViewById(R.id.toolbar_product_backlook);
         toolbarMenu = (ImageButton) rootView.findViewById(R.id.toolbar_menu);
         toolbarSearch = (ImageButton) rootView.findViewById(R.id.toolbar_search);
+        vf = (ViewFlipper) rootView.findViewById(R.id.vf);
+        vf.setAutoStart(true);
+        vf.setFlipInterval(1000);
+        vf.setInAnimation(a,R.anim.logo_in);
+        vf.setOutAnimation(a,R.anim.logo_out);
+        iv1 = (ImageView) rootView.findViewById(R.id.iv1);
+        iv2 = (ImageView) rootView.findViewById(R.id.iv2);
         productbacklook.setOnClickListener(this);
         lv = (MyPullToReflash) rootView.findViewById(R.id.lv_home);
         lv.setOnPullToRelashListener(this);

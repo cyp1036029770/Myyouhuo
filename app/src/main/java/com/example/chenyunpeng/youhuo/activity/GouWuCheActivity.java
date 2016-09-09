@@ -186,11 +186,13 @@ public class GouWuCheActivity extends BaseActivity implements CompoundButton.OnC
     }
 
     private void clear() {
-
+        //清除购物车中被选中的商品
     }
 
     private void start() {
-        Toast.makeText(this,"支付了",Toast.LENGTH_SHORT).show();
+        //传过去一个包含被选中商品的bean
+       startActivity(new Intent(this,ZhiFuActivity.class));
+        overridePendingTransition(R.anim.fade_in_choose,R.anim.fade_out_boys);
     }
 
 
